@@ -1,22 +1,28 @@
 const asyncHandler = require('express-async-handler')
 
-// const Recipe = require('../models/recipeModel')
-
-// Get recipes    GET /api/recipes    Public
+// Get recipes    GET /api/recipes       Public
 const getRecipes = asyncHandler(async (req, res) => {
-  // const recipes = await Recipe.find()
-  // const  { name, ingredients, instructions} = req.body
+  res.status(200).json({ message: 'Get Recipes from controller action' })
+})
 
-  // if (!name || !ingredients || !instructions) {
-  //   res.status(400)
-  //   throw new Error('Please add all fields')
-  // }
+// Post recipe    POST /api/recipes      Private
+const setRecipe = asyncHandler(async (req, res) => {
+  res.status(200).json({ message: 'Set Recipe from controller' })
+})
 
+// Update recipe  PUT /api/recipes/:id    Private
+const updateRecipe = asyncHandler(async (req, res) => {
+  res.status(200).json({ message: 'Update Recipe from controller' })
+})
 
-
-  res.status(200).json({message: "Get Recipes from controller action"})
+// Delete recipe  DELETE /api/recipes/:id Private
+const deleteRecipe = asyncHandler(async (req, res) => {
+  res.status(200).json({ message: 'Delete Recipe from controller' })
 })
 
 module.exports = {
   getRecipes,
+  setRecipe,
+  updateRecipe,
+  deleteRecipe,
 }
