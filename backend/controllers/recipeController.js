@@ -1,23 +1,85 @@
 const asyncHandler = require('express-async-handler')
+const Recipe = require('../models/recipeModel')
+const User = require('../models/userModel')
 
 // Get recipes    GET /api/recipes       Public
 const getRecipes = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: 'Get Recipes from controller action' })
+  const recipes = await Recipe.find({ user: req.user.id })
+
+  res.status(200).json(recipes)
 })
 
 // Post recipe    POST /api/recipes      Private
 const setRecipe = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: 'Set Recipe from controller' })
+  const { name, ingredients, instructions } = req.body
+  if (!name || !ingredients || !instructions) {
+    res.status(400)
+    throw new Error('Please complete the form')
+  }
+
+  const recipe = await Recipe.create({
+    name: req.body.name,
+    ingredients: req.body.ingredients,
+    instructions: req.body.instructions,
+    user: req.user.id,
+  })
+
+  res.status(200).json(recipe)
 })
 
 // Update recipe  PUT /api/recipes/:id    Private
 const updateRecipe = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: 'Update Recipe from controller' })
+  const recipe = await Recipe.findById(req.params.id)
+
+  // Check for recipe
+  if (!recipe) {
+    res.status(400)
+    throw new Error('recipe not found')
+  }
+
+  // Check for user
+  if (!recipe.user) {
+    res.status(401)
+    throw new Error('User not found')
+  }
+
+  // Match user to recipes
+  if (recipe.user.toString() !== req.user.id) {
+    res.status(401)
+    throw new Error('User not authorized or does not own this recipe')
+  }
+
+  const updatedRecipe = await Recipe.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  })
+
+  res.status(200).json(updatedRecipe)
 })
 
 // Delete recipe  DELETE /api/recipes/:id Private
 const deleteRecipe = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: 'Delete Recipe from controller' })
+  const recipe = await Recipe.findById(req.params.id)
+
+  if (!recipe) {
+    res.status(400)
+    throw new Error('Recipe not found')
+  }
+
+  // Check for user
+  if (!req.user) {
+    res.status(401)
+    throw new Error('User not found')
+  }
+
+  // Make sure the logged in user matches the recipe user
+  if (recipe.user.toString() !== req.user.id) {
+    res.status(401)
+    throw new Error('User not authorized')
+  }
+
+  await recipe.remove()
+
+  res.status(200).json({ id: req.params.id })
 })
 
 module.exports = {
