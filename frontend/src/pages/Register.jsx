@@ -80,6 +80,7 @@ function Register() {
               id='name'
               name='name'
               value={name}
+              autoFocus
               placeholder='Enter your name'
               onChange={onChange}
             />

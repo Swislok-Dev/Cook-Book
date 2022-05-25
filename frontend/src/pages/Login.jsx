@@ -68,11 +68,11 @@ function Login() {
           <div className='form-group'>
             <input
               type='email'
-              classname='form-control'
+              className='form-control'
               id='email'
               name='email'
               value={email}
-              authFocus
+              autoFocus
               placeholder='Enter your email'
               onChange={onChange}
             />

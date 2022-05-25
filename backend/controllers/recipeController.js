@@ -12,19 +12,35 @@ const getRecipes = asyncHandler(async (req, res) => {
 // Post recipe    POST /api/recipes      Private
 const setRecipe = asyncHandler(async (req, res) => {
   const { name, ingredients, instructions } = req.body
-  if (!name || !ingredients || !instructions) {
-    res.status(400)
-    throw new Error('Please complete the form')
+
+  if (!req.user.id) {
+    res.status(401)
+    throw new Error('Not logged into correct user')
   }
 
-  const recipe = await Recipe.create({
+  if (!name) {
+    res.status(400)
+    throw new Error('Please give the recipe a name')
+  }
+
+  if (!ingredients) {
+    res.status(400)
+    throw new Error('Please give some ingredients')
+  }
+
+  if (!instructions) {
+    res.status(400)
+    throw new Error('Please tell us how to make this!')
+  }
+
+  const newRecipe = await Recipe.create({
     name: req.body.name,
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
     user: req.user.id,
   })
 
-  res.status(200).json(recipe)
+  res.status(200).json(newRecipe)
 })
 
 // Update recipe  PUT /api/recipes/:id    Private
@@ -49,9 +65,13 @@ const updateRecipe = asyncHandler(async (req, res) => {
     throw new Error('User not authorized or does not own this recipe')
   }
 
-  const updatedRecipe = await Recipe.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  })
+  const updatedRecipe = await Recipe.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {
+      new: true,
+    }
+  )
 
   res.status(200).json(updatedRecipe)
 })
