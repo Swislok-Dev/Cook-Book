@@ -2,8 +2,15 @@ const asyncHandler = require('express-async-handler')
 const Recipe = require('../models/recipeModel')
 const User = require('../models/userModel')
 
-// Get recipes    GET /api/recipes       Public
+// Get all recipes  GET /api/recipes    Public
 const getRecipes = asyncHandler(async (req, res) => {
+  const allRecipes = await Recipe.find()
+
+  res.status(200).json(allRecipes)
+})
+
+// Get recipes    GET /api/recipes/mine    Private
+const getUserRecipes = asyncHandler(async (req, res) => {
   const recipes = await Recipe.find({ user: req.user.id })
 
   res.status(200).json(recipes)
@@ -104,6 +111,7 @@ const deleteRecipe = asyncHandler(async (req, res) => {
 
 module.exports = {
   getRecipes,
+  getUserRecipes,
   setRecipe,
   updateRecipe,
   deleteRecipe,
