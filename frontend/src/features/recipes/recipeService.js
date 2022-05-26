@@ -15,6 +15,13 @@ const createRecipe = async (recipeData, token) => {
   return response.data
 }
 
+// Get all recipes
+const getRecipes = async () => {
+  const response = await axios.get(API_URL)
+
+  return response.data
+}
+
 // Get user recipes
 const getUserRecipes = async (token) => {
   const config = {
@@ -23,7 +30,7 @@ const getUserRecipes = async (token) => {
     },
   }
 
-  const response = await axios.get(API_URL, config)
+  const response = await axios.get(API_URL + 'mine', config)
 
   return response.data
 }
@@ -42,6 +49,7 @@ const deleteRecipe = async (recipeId, token) => {
 }
 
 const recipeService = {
+  getRecipes,
   createRecipe,
   getUserRecipes,
   deleteRecipe,
