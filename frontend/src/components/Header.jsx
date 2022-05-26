@@ -14,6 +14,10 @@ function Header() {
     navigate('/')
   }
 
+  const onDashboard = () => {
+    navigate('/dashboard')
+  }
+
   return (
     <header className='header'>
       <div className='logo'>
@@ -21,11 +25,18 @@ function Header() {
       </div>
       <ul>
         {user ? (
-          <li>
-            <button className='btn' onClick={onLogout}>
-              <FaSignOutAlt /> Logout
-            </button>
-          </li>
+          <>
+            <li>
+              <button className='btn dashboard-btn' onClick={onDashboard}>
+                Dashboard
+              </button>
+            </li>
+            <li>
+              <button className='btn' onClick={onLogout}>
+                <FaSignOutAlt /> Logout
+              </button>
+            </li>
+          </>
         ) : (
           <>
             <li>

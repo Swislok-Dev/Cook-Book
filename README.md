@@ -17,7 +17,7 @@ Click on register to create a user. This will bring you to the Dashboard where y
 
 ## Login a user
 
-Click on login to login to your pre-existing account. 
+Click on login to login to your pre-existing account.
 
 ## Create a recipe
 

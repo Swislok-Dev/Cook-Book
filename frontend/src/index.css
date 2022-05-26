@@ -151,6 +151,12 @@ h3 {
   justify-content: center;
 }
 
+.dashboard-btn {
+  color: #000;
+  background: transparent;
+  border: none;
+}
+
 .btn svg {
   margin-right: 8px;
 }
