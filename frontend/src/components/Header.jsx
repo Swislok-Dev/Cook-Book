@@ -14,9 +14,9 @@ function Header() {
     navigate('/')
   }
 
-  const onDashboard = () => {
-    navigate('/dashboard')
-  }
+  // const onDashboard = () => {
+  //   navigate('/dashboard')
+  // }
 
   return (
     <header className='header'>
@@ -27,9 +27,9 @@ function Header() {
         {user ? (
           <>
             <li>
-              <button className='btn dashboard-btn' onClick={onDashboard}>
+              <Link to='/dashboard' className='btn dashboard-btn' >
                 Dashboard
-              </button>
+              </Link>
             </li>
             <li>
               <button className='btn' onClick={onLogout}>
