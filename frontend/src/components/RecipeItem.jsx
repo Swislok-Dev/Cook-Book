@@ -1,9 +1,8 @@
 import { useDispatch } from 'react-redux'
 import { deleteRecipe } from '../features/recipes/recipeSlice.js'
 
-function RecipeForm({ recipe }) {
+function RecipeItem({ recipe }) {
   const dispatch = useDispatch()
-
   return (
     <div className='recipe'>
       <div>{new Date(recipe.createdAt).toLocaleString('en-US')}</div>
@@ -18,4 +17,4 @@ function RecipeForm({ recipe }) {
   )
 }
 
-export default RecipeForm
+export default RecipeItem
