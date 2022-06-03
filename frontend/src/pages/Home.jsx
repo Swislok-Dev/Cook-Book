@@ -29,8 +29,6 @@ function Home() {
       <section className='content'>
         {recipes.length > 0 ? (
           <div className='recipes'>
-            <p>Recipes here</p>
-
             {recipes.map((recipe) => (
               <RecipeItem key={recipe._id} recipe={recipe} />
             ))}

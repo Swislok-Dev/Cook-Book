@@ -7,9 +7,9 @@ const getRecipes = asyncHandler(async (req, res) => {
   const allRecipes = await Recipe.find()
   if (!allRecipes) {
     res.status(400)
-    throw new Error("No recipes found")
+    throw new Error('No recipes found')
   } else {
-    console.log("recipeController found all the recipes!")
+    console.log('recipeController found all the recipes!')
   }
   res.status(200).json(allRecipes)
 })

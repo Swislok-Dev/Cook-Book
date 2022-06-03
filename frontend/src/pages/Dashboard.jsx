@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
 import { getUserRecipes, reset } from '../features/recipes/recipeSlice.js'
 import Spinner from '../components/Spinner'
 import RecipeForm from '../components/RecipeForm'
@@ -18,6 +19,7 @@ function Dashboard() {
   useEffect(() => {
     if (isError) {
       console.log(message)
+      toast.error(message)
     }
 
     if (!user) {
