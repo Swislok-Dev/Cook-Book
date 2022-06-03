@@ -123,7 +123,7 @@ export const recipeSlice = createSlice({
       .addCase(getRecipes.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.recipes.push(action.payload)
+        state.recipes = action.payload
       })
       .addCase(getRecipes.rejected, (state, action) => {
         state.isLoading = false
