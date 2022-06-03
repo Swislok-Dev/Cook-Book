@@ -32,8 +32,7 @@ function RecipeForm() {
     e.preventDefault()
     if (!isError && isSuccess) {
       dispatch(createRecipe(formData))
-      toast("We have submitted your new recipe")
-      
+      toast('We have submitted your new recipe')
     }
   }
 
