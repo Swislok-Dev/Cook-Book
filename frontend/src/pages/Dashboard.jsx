@@ -42,7 +42,7 @@ function Dashboard() {
   return (
     <>
       <section className='heading'>
-        <h1>Welcome {user && user.name}</h1>
+        <h1>Welcome {user && user.username}</h1>
         <p>Recipes Dashboard</p>
       </section>
 

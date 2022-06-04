@@ -8,11 +8,11 @@ import Spinner from '../components/Spinner'
 
 function Login() {
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: '',
   })
 
-  const { email, password } = formData
+  const { username, password } = formData
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -44,7 +44,7 @@ function Login() {
     e.preventDefault()
 
     const userData = {
-      email,
+      username,
       password,
     }
 
@@ -61,19 +61,20 @@ function Login() {
         <h1>
           <FaSignInAlt /> Login
         </h1>
+        <p>Login to add recipes</p>
       </section>
 
       <section className='form'>
         <form onSubmit={onSubmit}>
           <div className='form-group'>
             <input
-              type='email'
+              type='username'
               className='form-control'
-              id='email'
-              name='email'
-              value={email}
+              id='username'
+              name='username'
+              value={username}
               autoFocus
-              placeholder='Enter your email'
+              placeholder='Enter your username'
               onChange={onChange}
             />
           </div>
