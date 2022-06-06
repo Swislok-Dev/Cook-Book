@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const {
   getRecipes,
+  getRecipe,
   getUserRecipes,
   setRecipe,
   updateRecipe,
@@ -11,6 +12,7 @@ const { protect } = require('../middleware/authMiddleware')
 
 router.route('/').get(getRecipes).post(protect, setRecipe)
 router.route('/mine').get(protect, getUserRecipes)
+router.route('/:id').get(getRecipe)
 
 router.route('/:id').put(protect, updateRecipe).delete(protect, deleteRecipe)
 

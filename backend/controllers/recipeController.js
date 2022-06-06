@@ -1,6 +1,5 @@
 const asyncHandler = require('express-async-handler')
 const Recipe = require('../models/recipeModel')
-const User = require('../models/userModel')
 
 // Get all recipes  GET /api/recipes    Public
 const getRecipes = asyncHandler(async (req, res) => {
@@ -12,6 +11,20 @@ const getRecipes = asyncHandler(async (req, res) => {
     console.log('recipeController found all the recipes!')
   }
   res.status(200).json(allRecipes)
+})
+
+const getRecipe = asyncHandler(async (req, res) => {
+  const recipe = await Recipe.findById(req.params.id)
+
+  try {
+    if (recipe) {
+      res.status(400)
+      throw new Error('No recipe id was found')
+    } else {
+      console.log('recipeController found one recipe')
+    }
+  } catch (error) {}
+  res.status(200).json(recipe)
 })
 
 // Get recipes    GET /api/recipes/mine    Private
@@ -116,6 +129,7 @@ const deleteRecipe = asyncHandler(async (req, res) => {
 
 module.exports = {
   getRecipes,
+  getRecipe,
   getUserRecipes,
   setRecipe,
   updateRecipe,
