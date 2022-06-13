@@ -7,6 +7,7 @@ import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
 import Header from './components/Header.jsx'
 import Home from './pages/Home.jsx'
+import RecipeContainer from './containers/RecipeContainer.jsx'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Header />
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/recipes/*' element={<RecipeContainer /> } />
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />

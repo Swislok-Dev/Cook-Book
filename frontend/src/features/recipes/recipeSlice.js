@@ -3,6 +3,7 @@ import recipeService from './recipeService'
 
 const initialState = {
   recipes: [],
+  recipe: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -64,6 +65,24 @@ export const getUserRecipes = createAsyncThunk(
   }
 )
 
+// Show a single recipe
+export const showRecipe = createAsyncThunk(
+  'recipes/:_id',
+  async (id, thunkAPI) => {
+    try {
+      return await recipeService.showRecipe(id)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 // Delete user recipe
 export const deleteRecipe = createAsyncThunk(
   'recipes/delete',
@@ -100,6 +119,19 @@ export const recipeSlice = createSlice({
         state.recipes.push(action.payload)
       })
       .addCase(createRecipe.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(showRecipe.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(showRecipe.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.recipe = action.payload
+      })
+      .addCase(showRecipe.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

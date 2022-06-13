@@ -19,6 +19,7 @@ function RecipeItem({ recipe }) {
       )
     }
   }
+
   return (
     <div className='recipe'>
       <div>{new Date(recipe.createdAt).toLocaleString('en-US')}</div>

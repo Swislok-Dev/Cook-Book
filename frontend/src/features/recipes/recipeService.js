@@ -19,6 +19,7 @@ const createRecipe = async (recipeData, token) => {
 const getRecipes = async () => {
   const response = await axios.get(API_URL)
 
+
   return response.data
 }
 
@@ -31,6 +32,14 @@ const getUserRecipes = async (token) => {
   }
 
   const response = await axios.get(API_URL + 'mine', config)
+
+  return response.data
+}
+
+// Show a single recipe
+const showRecipe = async (recipeId) => {
+  const response = await axios.get(API_URL + recipeId)
+
 
   return response.data
 }
@@ -49,6 +58,7 @@ const deleteRecipe = async (recipeId, token) => {
 }
 
 const recipeService = {
+  showRecipe,
   getRecipes,
   createRecipe,
   getUserRecipes,
