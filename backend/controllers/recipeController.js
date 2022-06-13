@@ -14,16 +14,16 @@ const getRecipes = asyncHandler(async (req, res) => {
 })
 
 const getRecipe = asyncHandler(async (req, res) => {
-  const recipe = await Recipe.findById(req.params.id)
+  const recipe = await Recipe.findById({ _id: req.params.id })
+  debugger
 
-  try {
-    if (recipe) {
-      res.status(400)
-      throw new Error('No recipe id was found')
-    } else {
-      console.log('recipeController found one recipe')
-    }
-  } catch (error) {}
+  if (!recipe) {
+    res.status(400)
+    throw new Error('No recipe id was found')
+  } else {
+    console.log('recipeController found one recipe')
+  }
+
   res.status(200).json(recipe)
 })
 
