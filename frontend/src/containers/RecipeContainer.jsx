@@ -3,7 +3,7 @@ import { Routes, Route, Outlet } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getRecipes } from '../features/recipes/recipeSlice.js'
 import Spinner from '../components/Spinner'
-import Recipe from '../components/Recipe'
+import Recipe from '../pages/Recipe'
 import RecipeList from '../components/RecipeList'
 
 function RecipeContainer() {

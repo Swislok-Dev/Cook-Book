@@ -1,7 +1,7 @@
 import React from 'react'
 import RecipeItem from './RecipeItem'
 import { Link } from 'react-router-dom'
-import Recipe from './Recipe'
+import Recipe from '../pages/Recipe'
 
 function RecipeList({ recipes }) {
   return (
