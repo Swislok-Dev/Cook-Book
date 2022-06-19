@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createRecipe, reset } from '../features/recipes/recipeSlice.js'
-import { toast } from 'react-toastify'
+
 
 function RecipeForm() {
   const [formData, setFormData] = useState({
@@ -11,7 +11,7 @@ function RecipeForm() {
   })
 
   const { name, ingredients, instructions } = formData
-  const { isError, message, isSuccess } = useSelector((state) => state.recipes)
+  const { isError, message } = useSelector((state) => state.recipes)
 
   const dispatch = useDispatch()
 
@@ -30,9 +30,8 @@ function RecipeForm() {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    if (!isError && isSuccess) {
+    if (!isError) {
       dispatch(createRecipe(formData))
-      toast('We have submitted your new recipe')
     }
   }
 
