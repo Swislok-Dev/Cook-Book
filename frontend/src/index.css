@@ -151,6 +151,12 @@ h3 {
   justify-content: center;
 }
 
+.form-btn {
+  background: #f4f4f4;
+  border: grey;
+  color: #000
+}
+
 .dashboard-btn {
   color: #000;
   background: transparent;
