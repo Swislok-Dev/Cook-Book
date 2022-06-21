@@ -1,27 +1,41 @@
 import { useParams } from 'react-router-dom'
 
-
 function Recipe({ recipes }) {
   let recipeId = useParams()
 
   const recipe = recipes.filter((recipe) => recipe._id === recipeId.id)[0]
 
-  const convertDate = (recipeDate) => {
-    return new Date(recipeDate).toLocaleString('en-US')
+  const recipeDate = () => {
+    return new Date(recipe.createdAt).toLocaleString('en-US')
+  }
+
+  const ingredientList = () => {
+    return recipe.ingredients
+      .split(', ')
+      .map((item) => <li className='ingredient-item'>{item}</li>)
+  }
+
+  const instructionList = () => {
+    return recipe['instructions']
+      .split('.')
+      .map((item) => <li className='instruction-item'>{item}</li>)
   }
 
   return (
     <>
-    <section className="heading">
-      <h1>Now viewing {recipe.name}</h1>
-    </section>
-      <h1>Recipe Show Page</h1>
-      <p>{recipe._id}</p>
-      <p>{recipe.name}</p>
-      <p>{recipe.ingredients}</p>
-      <p>{recipe.instructions}</p>
-      <p>{recipe.user}</p>
-      <p>{convertDate(recipe.createdAt)}</p>
+      <section className='heading'>
+        <h1>{recipe.name}</h1>
+      </section>
+      
+      <h2>Ingredients</h2>
+      <p>{ingredientList()}</p>
+
+      <h2>Instructions</h2>
+      <p>{instructionList()}</p>
+
+      {/* <p>{recipe.user}</p> */}
+      <h3>Date posted</h3>
+      <p>{recipeDate()}</p>
     </>
   )
 }
